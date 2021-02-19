@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="190dp">
+<TextView
+    android:id="@+id/txtviw"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Deposit "
+    android:gravity="center"
+    android:textSize="20dp"
+    android:layout_margin="10dp"
+    />
+    <EditText
+        android:id="@+id/depositamount"
+        android:hint="Amount"
+        android:gravity="center"
+        android:inputType="number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtviw"
+        android:layout_margin="5dp"
+        />
+
+    <Button
+        android:id="@+id/mkdeposit"
+        android:layout_below="@+id/depositamount"
+        android:text="Make Deposit"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="makedeposit"
+        android:layout_margin="5dp"
+        />
+
+</RelativeLayout>
