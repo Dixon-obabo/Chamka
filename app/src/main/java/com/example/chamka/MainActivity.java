@@ -9,10 +9,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class MainActivity extends AppCompatActivity {
     Button loan, deposit, mkdepo,rqloan;
     boolean clicked=false;
     EditText dpamount, rsn, lnamount;
+    FirebaseDatabase database=FirebaseDatabase.getInstance();
     Dialog dialog;
     @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +48,14 @@ public class MainActivity extends AppCompatActivity {
         mkdepo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, dpamount.getText().toString(), Toast.LENGTH_SHORT).show();
+
+                database.getReference("Att_Depo").setValue(dpamount.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(MainActivity.this, "data has been added", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
             }
         });
 
