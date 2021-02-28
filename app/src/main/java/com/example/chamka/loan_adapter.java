@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,12 +19,28 @@ public class loan_adapter extends FirebaseRecyclerAdapter <loan,loan_adapter.myv
         super(options);
     }
 
+    @Override
+    protected void onBindViewHolder(@NonNull myviewholder holder, int position, @NonNull loan model) {
+
+        holder.amount.setText(model.amount);
+        holder.description.setText(model.description);
+        holder.email.setText(model.email);
+        holder.id.setText(model.userid);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(), model.userid, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
 
     @NonNull
     @Override
     public myviewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.loan_transactions,parent,false);
+        return new myviewholder(view);
     }
 
     class myviewholder extends RecyclerView.ViewHolder{
@@ -34,10 +51,10 @@ public class loan_adapter extends FirebaseRecyclerAdapter <loan,loan_adapter.myv
 
         public myviewholder(@NonNull View itemView) {
             super(itemView);
-            this.id =itemView.findViewById(R.id.);
-            this.amount = amount;
-            this.email = email;
-            this.description = description;
+            this.id =itemView.findViewById(R.id.user_id);
+            this.amount = itemView.findViewById(R.id.Loan_amount);
+            this.email = itemView.findViewById(R.id.user_email);
+            this.description = itemView.findViewById(R.id.loan_description);
         }
 
 
