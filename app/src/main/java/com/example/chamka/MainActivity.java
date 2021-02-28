@@ -1,6 +1,8 @@
 package com.example.chamka;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -10,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -21,19 +25,24 @@ public class MainActivity extends AppCompatActivity {
     EditText dpamount, rsn, lnamount;
     FirebaseDatabase database=FirebaseDatabase.getInstance();
     Dialog dialog;
+    loan_adapter ladap;
+    RecyclerView recyclerView;
     FirebaseAuth auth;
     FirebaseUser currentuser;
+    FirebaseRecyclerOptions<loan> opt;
     @Override
         protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         loan=findViewById(R.id.loan);
+        recyclerView=findViewById(R.id.recycler);
         deposit=findViewById(R.id.Deposit);
         dialog= new Dialog(this);
         auth=FirebaseAuth.getInstance();
         currentuser=auth.getCurrentUser();
+        getdata();
 
-        check_login(currentuser);
+        //check_login(currentuser);
 
     }
 
@@ -99,6 +108,15 @@ public class MainActivity extends AppCompatActivity {
         }else {
             Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show();
         }
+    }
+
+
+    public  void getdata(){
+        opt=new FirebaseRecyclerOptions.Builder<loan>().setQuery(FirebaseDatabase.getInstance().getReference("Att_depo"),loan.class).build();
+        ladap= new loan_adapter(opt);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(ladap);
+
     }
 
 
