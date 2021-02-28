@@ -49,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String key=database.getReference().push().getKey();
-                database.getReference("Att_Depo").child(key).setValue(dpamount.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                loan myloan=new loan("12","100","cheche.oloo@gmail.com","cool stuff","100:100");
+                database.getReference("Att_Depo").child(key).setValue(myloan).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(MainActivity.this, "data has been added", Toast.LENGTH_SHORT).show();

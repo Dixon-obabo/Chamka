@@ -3,26 +3,26 @@ package com.example.chamka;
 public class loan {
 
 
-    String username;
+    String userid;
     String amount;
     String email;
     String description;
     String timestamp;
 
-    public loan(String username, String amount, String email, String description, String timestamp) {
-        this.username = username;
+    public loan(String userid, String amount, String email, String description, String timestamp) {
+        this.userid = userid;
         this.amount = amount;
         this.email = email;
         this.description = description;
         this.timestamp = timestamp;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserid() {
+        return userid;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserid(String userid) {
+        this.userid = userid;
     }
 
     public String getAmount() {
