@@ -3,6 +3,7 @@ package com.example.chamka;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +11,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     EditText dpamount, rsn, lnamount;
     FirebaseDatabase database=FirebaseDatabase.getInstance();
     Dialog dialog;
+    FirebaseAuth auth;
+    FirebaseUser currentuser;
     @Override
         protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +30,10 @@ public class MainActivity extends AppCompatActivity {
         loan=findViewById(R.id.loan);
         deposit=findViewById(R.id.Deposit);
         dialog= new Dialog(this);
+        auth=FirebaseAuth.getInstance();
+        currentuser=auth.getCurrentUser();
+
+        check_login(currentuser);
 
     }
 
@@ -81,4 +90,17 @@ public class MainActivity extends AppCompatActivity {
     public void makedeposit(View view) {
 
     }
+
+
+    public void check_login(FirebaseUser user){
+        if (user==null){
+            Intent intent= new Intent(getApplicationContext(),Sign_in.class);
+            startActivity(intent);
+        }else {
+            Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+
 }
