@@ -90,17 +90,21 @@ public class MainActivity extends AppCompatActivity {
         loan=dialog.findViewById(R.id.rqloan);
         rsn=dialog.findViewById(R.id.reason);
         lnamount=dialog.findViewById(R.id.loanamount);
-//        SimpleDateFormat sdf= new SimpleDateFormat("YYYY/MM/DD 'at' HH:MM:SS");
-//
-//        loan myloan = new loan(currentuser.getUid(),lnamount,currentuser.getEmail(),rsn.getText().toString(),);
 
         loan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SimpleDateFormat sdf= new SimpleDateFormat("YYYY/MM/DD 'at' HH:MM:SS");
                 String date= sdf.format(new Date());
+                loan myloan = new loan(currentuser.getUid(),lnamount.getText().toString(),currentuser.getEmail(),rsn.getText().toString(),date);
+                database.getReference("Att_Depo").child(database.getReference().push().getKey()).setValue(myloan).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(MainActivity.this, "Your loan request has been received", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
-                Toast.makeText(MainActivity.this, date, Toast.LENGTH_SHORT).show();
+               /// Toast.makeText(MainActivity.this, rsn.getText().toString(), Toast.LENGTH_SHORT).show();
             }
         });
         dialog.show();
