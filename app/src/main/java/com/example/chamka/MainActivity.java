@@ -70,13 +70,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String key=database.getReference().push().getKey();
-                loan myloan=new loan("12","100",currentuser.getEmail(),"cool stuff","100:100");
-                database.getReference("Att_Depo").child(key).setValue(myloan).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(MainActivity.this, "data has been added", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                //loan myloan=new loan("12","100",currentuser.getEmail(),"cool stuff","100:100");
+//                database.getReference("Att_Depo").child(key).setValue(myloan).addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void aVoid) {
+//                        Toast.makeText(MainActivity.this, "data has been added", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
 
             }
         });
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-               /// Toast.makeText(MainActivity.this, rsn.getText().toString(), Toast.LENGTH_SHORT).show();
+
             }
         });
         dialog.show();
