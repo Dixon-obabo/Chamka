@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         currentuser=auth.getCurrentUser();
         getdata();
 
-        //check_login(currentuser);
+        check_login(currentuser);
 
     }
 
