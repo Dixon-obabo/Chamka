@@ -22,10 +22,10 @@ public class loan_adapter extends FirebaseRecyclerAdapter <loan,loan_adapter.myv
     @Override
     protected void onBindViewHolder(@NonNull myviewholder holder, int position, @NonNull loan model) {
 
-        holder.amount.setText(model.amount);
-        holder.description.setText(model.description);
-        holder.email.setText(model.email);
-        holder.id.setText(model.userid);
+        holder.amount.setText(model.getAmount());
+        holder.description.setText(model.getDescription());
+        holder.email.setText(model.getEmail());
+        holder.id.setText(model.getUserid());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,10 +51,10 @@ public class loan_adapter extends FirebaseRecyclerAdapter <loan,loan_adapter.myv
 
         public myviewholder(@NonNull View itemView) {
             super(itemView);
-            this.id =itemView.findViewById(R.id.user_id);
-            this.amount = itemView.findViewById(R.id.Loan_amount);
-            this.email = itemView.findViewById(R.id.user_email);
-            this.description = itemView.findViewById(R.id.loan_description);
+            id =itemView.findViewById(R.id.user_id);
+            amount = itemView.findViewById(R.id.Loan_amount);
+            email = itemView.findViewById(R.id.user_email);
+            description = itemView.findViewById(R.id.loan_description);
         }
 
 

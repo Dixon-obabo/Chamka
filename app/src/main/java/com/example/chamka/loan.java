@@ -9,6 +9,7 @@ public class loan {
     String description;
     String timestamp;
 
+    loan(){}
     public loan(String userid, String amount, String email, String description, String timestamp) {
         this.userid = userid;
         this.amount = amount;

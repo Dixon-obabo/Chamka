@@ -112,13 +112,22 @@ public class MainActivity extends AppCompatActivity {
 
 
     public  void getdata(){
-        opt=new FirebaseRecyclerOptions.Builder<loan>().setQuery(FirebaseDatabase.getInstance().getReference("Att_depo"),loan.class).build();
+        opt=new FirebaseRecyclerOptions.Builder<loan>().setQuery(FirebaseDatabase.getInstance().getReference("Att_Depo"),loan.class).build();
         ladap= new loan_adapter(opt);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(ladap);
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        ladap.startListening();
+    }
 
-
+    @Override
+    protected void onStop() {
+        super.onStop();
+        ladap.stopListening();
+    }
 }
