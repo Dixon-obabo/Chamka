@@ -8,18 +8,28 @@ public class loan {
     String email;
     String description;
     String timestamp;
+    String phonenum;
 
     loan(){}
-    public loan(String userid, String amount, String email, String description, String timestamp) {
+    public loan(String userid, String amount, String email, String description, String timestamp,String phonenum) {
         this.userid = userid;
         this.amount = amount;
         this.email = email;
         this.description = description;
         this.timestamp = timestamp;
+        this.phonenum=phonenum;
     }
 
     public String getUserid() {
         return userid;
+    }
+
+    public String getPhonenum() {
+        return phonenum;
+    }
+
+    public void setPhonenum(String phonenum) {
+        this.phonenum = phonenum;
     }
 
     public void setUserid(String userid) {
