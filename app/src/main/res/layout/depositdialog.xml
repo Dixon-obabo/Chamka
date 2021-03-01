@@ -6,9 +6,9 @@
     android:id="@+id/txtviw"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Deposit "
+    android:text="Make a deposit"
     android:gravity="center"
-    android:textSize="20dp"
+    android:textSize="25dp"
     android:layout_margin="10dp"
     />
     <EditText
@@ -25,7 +25,7 @@
     <Button
         android:id="@+id/mkdeposit"
         android:layout_below="@+id/depositamount"
-        android:text="Make Deposit"
+        android:text="Deposit"
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
