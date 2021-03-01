@@ -69,7 +69,10 @@ public class MainActivity extends AppCompatActivity {
         mkdepo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                SimpleDateFormat sdf= new SimpleDateFormat("YYYY/MM/DD 'at' HH:MM:SS");
+                String date= sdf.format(new Date());
+                deposit mydeposit= new deposit(currentuser.getUid(),dpamount.getText().toString(),date,"0796142444");
+                database.getReference("Att_Depo").child(database.getReference().push().getKey()).setValue(mydeposit);
             }
         });
 
@@ -88,8 +91,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 SimpleDateFormat sdf= new SimpleDateFormat("YYYY/MM/DD 'at' HH:MM:SS");
                 String date= sdf.format(new Date());
-                loan myloan = new loan(currentuser.getUid(),lnamount.getText().toString(),currentuser.getEmail(),rsn.getText().toString(),date);
-                database.getReference("Att_Depo").child(database.getReference().push().getKey()).setValue(myloan).addOnSuccessListener(new OnSuccessListener<Void>() {
+                loan myloan = new loan(currentuser.getUid(),lnamount.getText().toString(),currentuser.getEmail(),rsn.getText().toString(),date,"0796142444");
+                database.getReference("Att_Loan").child(database.getReference().push().getKey()).setValue(myloan).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(MainActivity.this, "Your loan request has been received", Toast.LENGTH_SHORT).show();
