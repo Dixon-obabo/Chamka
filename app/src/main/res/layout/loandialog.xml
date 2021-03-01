@@ -4,12 +4,20 @@
     android:layout_width="300dp"
     android:orientation="vertical"
     android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Request a loan"
+        android:layout_gravity="center"
+        android:textSize="25dp"
+        />
 
     <EditText
         android:id="@+id/loanamount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="amount"
+        android:hint="Amount"
         android:inputType="number"
         android:layout_margin="5dp"
         android:gravity="center"
