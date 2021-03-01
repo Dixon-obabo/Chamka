@@ -19,6 +19,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class MainActivity extends AppCompatActivity {
     Button loan, deposit, mkdepo,rqloan;
     boolean clicked=false;
@@ -67,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String key=database.getReference().push().getKey();
-                loan myloan=new loan("12","100","cheche.oloo@gmail.com","cool stuff","100:100");
+                loan myloan=new loan("12","100",currentuser.getEmail(),"cool stuff","100:100");
                 database.getReference("Att_Depo").child(key).setValue(myloan).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -87,10 +90,17 @@ public class MainActivity extends AppCompatActivity {
         loan=dialog.findViewById(R.id.rqloan);
         rsn=dialog.findViewById(R.id.reason);
         lnamount=dialog.findViewById(R.id.loanamount);
+//        SimpleDateFormat sdf= new SimpleDateFormat("YYYY/MM/DD 'at' HH:MM:SS");
+//
+//        loan myloan = new loan(currentuser.getUid(),lnamount,currentuser.getEmail(),rsn.getText().toString(),);
+
         loan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, rsn.getText().toString(), Toast.LENGTH_SHORT).show();
+                SimpleDateFormat sdf= new SimpleDateFormat("YYYY/MM/DD 'at' HH:MM:SS");
+                String date= sdf.format(new Date());
+
+                Toast.makeText(MainActivity.this, date, Toast.LENGTH_SHORT).show();
             }
         });
         dialog.show();
