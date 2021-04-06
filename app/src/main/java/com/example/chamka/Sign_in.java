@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -14,9 +15,10 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Sign_in extends AppCompatActivity {
 
-    EditText mail;
+    EditText mail,phone,name;
     EditText password;
     FirebaseAuth auth;
+    TextView sigin,signup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +26,10 @@ public class Sign_in extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
         mail=findViewById(R.id.email);
         password=findViewById(R.id.password);
+        phone=findViewById(R.id.phone);
+        name=findViewById(R.id.name);
+        sigin=findViewById(R.id.signin);
+        signup=findViewById(R.id.signup);
         auth=FirebaseAuth.getInstance();
     }
 
@@ -39,6 +45,7 @@ public class Sign_in extends AppCompatActivity {
     }
 
     public void show(View view) {
+
     }
 
     public void hide(View view) {
