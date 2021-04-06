@@ -51,7 +51,7 @@
         android:layout_below="@+id/password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="login"
+        android:text="Log-In"
         android:layout_centerHorizontal="true"
         android:onClick="signin"
         />
