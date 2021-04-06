@@ -37,4 +37,10 @@ public class Sign_in extends AppCompatActivity {
             }
         });
     }
+
+    public void show(View view) {
+    }
+
+    public void hide(View view) {
+    }
 }
