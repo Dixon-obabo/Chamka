@@ -72,7 +72,12 @@ public class MainActivity extends AppCompatActivity {
                 SimpleDateFormat sdf= new SimpleDateFormat("YYYY/MM/DD 'at' HH:MM:SS");
                 String date= sdf.format(new Date());
                 deposit mydeposit= new deposit(currentuser.getUid(),dpamount.getText().toString(),date,"0796142444");
-                database.getReference("Att_Depo").child(database.getReference().push().getKey()).setValue(mydeposit);
+                database.getReference("Att_Depo").child(database.getReference().push().getKey()).setValue(mydeposit).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(MainActivity.this, "Attempting A Deposit Request", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 
