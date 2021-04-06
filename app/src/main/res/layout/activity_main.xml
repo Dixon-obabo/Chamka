@@ -43,36 +43,43 @@
         app:layout_anchor="@id/recycler"
         app:layout_anchorGravity="bottom|right"
         >
-        <LinearLayout
+        <ScrollView
             android:id="@+id/holder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:visibility="gone">
 
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/loan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_margin="5dp"
+        android:onClick="loandialog"
+        android:text="Loan"
+        />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/Deposit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:onClick="depositdialog"
+        android:text="Deposit"
+
+        android:layout_margin="5dp"
+        />
 
 
-            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                android:id="@+id/loan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_margin="5dp"
-                android:onClick="loandialog"
-                android:text="Loan"
-                />
+</LinearLayout>
 
-            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                android:id="@+id/Deposit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:onClick="depositdialog"
-                android:text="Deposit"
 
-                android:layout_margin="5dp"
-                />
-        </LinearLayout>
+        </ScrollView>
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
