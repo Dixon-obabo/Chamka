@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     Button loan, deposit, mkdepo,rqloan;
     boolean clicked=false;
     EditText dpamount, rsn, lnamount;
+    LinearLayout holder;
     FirebaseDatabase database=FirebaseDatabase.getInstance();
     Dialog dialog;
     loan_adapter ladap;
@@ -38,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         loan=findViewById(R.id.loan);
+        holder.findViewById(R.id.holder);
         recyclerView=findViewById(R.id.recycler);
         deposit=findViewById(R.id.Deposit);
         dialog= new Dialog(this);
@@ -45,19 +48,15 @@ public class MainActivity extends AppCompatActivity {
         currentuser=auth.getCurrentUser();
         getdata();
 
-        check_login(currentuser);
+        check_login();
 
     }
 
     public void openrequest(View view) {
-        if(clicked==true){
-            loan.setVisibility(View.GONE);
-            deposit.setVisibility(View.GONE);
-            clicked=false;
+        if(holder.getVisibility()==View.GONE){
+            holder.setVisibility(View.VISIBLE);
         }else {
-            loan.setVisibility(View.VISIBLE);
-            deposit.setVisibility(View.VISIBLE);
-            clicked=true;
+            holder.setVisibility(View.GONE);
         }
     }
 
@@ -115,8 +114,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void check_login(FirebaseUser user){
-        if (user==null){
+    public void check_login(){
+        if (currentuser==null){
             Intent intent= new Intent(getApplicationContext(),Sign_in.class);
             startActivity(intent);
         }else {
@@ -143,5 +142,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         ladap.stopListening();
+    }
+
+    public void signout(View view) {
+        auth.signOut();
+        Intent intent = new Intent(getApplicationContext(),Sign_in.class);
+        startActivity(intent);
     }
 }
