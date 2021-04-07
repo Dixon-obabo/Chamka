@@ -30,7 +30,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
-    Button loan, deposit, mkdepo;
+    Button loan, deposit, mkdepo, logout;
 
     EditText dpamount, rsn, lnamount;
     ScrollView holder;
@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
             database.getReference("Users").child(uid).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    String data[]=snapshot.getValue().toString().split(",");
+                 //   String data[]=snapshot.getValue().toString().split(",");
 
                 }
 
@@ -177,6 +177,17 @@ public class MainActivity extends AppCompatActivity {
         nm=dialog.findViewById(R.id.name);
         phn=dialog.findViewById(R.id.phone);
         em=dialog.findViewById(R.id.email);
+        logout=dialog.findViewById(R.id.logout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                auth.signOut();
+                Intent intent= new Intent(getApplicationContext(),Sign_in.class);
+                startActivity(intent);
+            }
+        });
 
+    dialog.show();
     }
+
 }
