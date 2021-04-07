@@ -1,5 +1,6 @@
 package com.example.chamka;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -19,7 +21,10 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -31,7 +36,9 @@ public class MainActivity extends AppCompatActivity {
     ScrollView holder;
     FirebaseDatabase database=FirebaseDatabase.getInstance();
     Dialog dialog;
+    String uid,phone;
     loan_adapter ladap;
+    TextView nm,em,phn;
     RecyclerView recyclerView;
     FirebaseAuth auth;
     FirebaseUser currentuser;
@@ -101,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 database.getReference("Att_Loan").child(database.getReference().push().getKey()).setValue(myloan).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(MainActivity.this, "Your loan request has been received", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Your loan is being processed", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -121,7 +128,20 @@ public class MainActivity extends AppCompatActivity {
             Intent intent= new Intent(getApplicationContext(),Sign_in.class);
             startActivity(intent);
         }else {
+            uid=currentuser.getUid();
             Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show();
+            database.getReference("Users").child(uid).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    String data[]=snapshot.getValue().toString().split(",");
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
         }
     }
 
@@ -150,5 +170,13 @@ public class MainActivity extends AppCompatActivity {
         auth.signOut();
         Intent intent = new Intent(getApplicationContext(),Sign_in.class);
         startActivity(intent);
+    }
+
+    public void User_dialog(View view) {
+        dialog.setContentView(R.layout.user_dialog);
+        nm=dialog.findViewById(R.id.name);
+        phn=dialog.findViewById(R.id.phone);
+        em=dialog.findViewById(R.id.email);
+
     }
 }
