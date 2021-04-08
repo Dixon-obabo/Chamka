@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }else {
             uid=currentuser.getUid();
-            //Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show();
+
             database.getReference("Users").child(uid).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
