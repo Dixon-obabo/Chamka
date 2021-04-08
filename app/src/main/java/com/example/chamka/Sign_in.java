@@ -39,6 +39,7 @@ public class Sign_in extends AppCompatActivity {
         password=findViewById(R.id.password);
         phone=findViewById(R.id.phone);
         login=findViewById(R.id.login);
+        login.setText("Log-In");
 
         name=findViewById(R.id.name);
         sigin=findViewById(R.id.signin);

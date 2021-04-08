@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         mkdepo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SimpleDateFormat sdf= new SimpleDateFormat("DD/MM/YYYY 'at' HH:MM:SS");
+                SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/YYYY 'at' HH:MM:SS");
                 String date= sdf.format(new Date());
                 deposit mydeposit= new deposit(currentuser.getUid(),dpamount.getText().toString(),date,phone);
                 database.getReference("Att_Depo").child(database.getReference().push().getKey()).setValue(mydeposit).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
         loan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SimpleDateFormat sdf= new SimpleDateFormat("YYYY/MM/DD 'at' HH:MM:SS");
+                SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/YYYY 'at' HH:MM:SS");
                 String date= sdf.format(new Date());
                 loan myloan = new loan(currentuser.getUid(),lnamount.getText().toString(),currentuser.getEmail(),rsn.getText().toString(),date,phone);
                 database.getReference("Att_Loan").child(database.getReference().push().getKey()).setValue(myloan).addOnSuccessListener(new OnSuccessListener<Void>() {
