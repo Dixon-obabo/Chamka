@@ -1,6 +1,7 @@
 package com.example.chamka;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,8 +20,11 @@ import android.widget.Toast;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -31,12 +35,13 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     Button loan, deposit, mkdepo, logout;
-
+    FloatingActionButton btn;
+    ExtendedFloatingActionButton btm;
     EditText dpamount, rsn, lnamount;
     ScrollView holder;
     FirebaseDatabase database=FirebaseDatabase.getInstance();
     Dialog dialog;
-    String uid,phone;
+    String uid,phone,name,email;
     loan_adapter ladap;
     TextView nm,em,phn;
     RecyclerView recyclerView;
@@ -52,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView=findViewById(R.id.recycler);
         deposit=findViewById(R.id.Deposit);
         dialog= new Dialog(this);
+        btm=findViewById(R.id.uname);
         auth=FirebaseAuth.getInstance();
         currentuser=auth.getCurrentUser();
         getdata();
@@ -77,13 +83,13 @@ public class MainActivity extends AppCompatActivity {
         mkdepo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SimpleDateFormat sdf= new SimpleDateFormat("YYYY/MM/DD 'at' HH:MM:SS");
+                SimpleDateFormat sdf= new SimpleDateFormat("DD/MM/YYYY 'at' HH:MM:SS");
                 String date= sdf.format(new Date());
-                deposit mydeposit= new deposit(currentuser.getUid(),dpamount.getText().toString(),date,"0796142444");
+                deposit mydeposit= new deposit(currentuser.getUid(),dpamount.getText().toString(),date,phone);
                 database.getReference("Att_Depo").child(database.getReference().push().getKey()).setValue(mydeposit).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(MainActivity.this, "Attempting A Deposit Request", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Deposit attempt processing", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -104,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 SimpleDateFormat sdf= new SimpleDateFormat("YYYY/MM/DD 'at' HH:MM:SS");
                 String date= sdf.format(new Date());
-                loan myloan = new loan(currentuser.getUid(),lnamount.getText().toString(),currentuser.getEmail(),rsn.getText().toString(),date,"0796142444");
+                loan myloan = new loan(currentuser.getUid(),lnamount.getText().toString(),currentuser.getEmail(),rsn.getText().toString(),date,phone);
                 database.getReference("Att_Loan").child(database.getReference().push().getKey()).setValue(myloan).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -129,11 +135,17 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }else {
             uid=currentuser.getUid();
-            Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show();
             database.getReference("Users").child(uid).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                 //   String data[]=snapshot.getValue().toString().split(",");
+                    String data[]=snapshot.getValue().toString().split(",");
+                    phone=data[0].replace("{phone=","");
+                    name=data[1].replace("name=","");
+                    email=data[2].replace("email=","");
+                    btm.setText(name);
+
+                    Toast.makeText(MainActivity.this, email, Toast.LENGTH_LONG).show();
 
                 }
 
@@ -147,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public  void getdata(){
-        opt=new FirebaseRecyclerOptions.Builder<loan>().setQuery(FirebaseDatabase.getInstance().getReference("Att_Depo"),loan.class).build();
+        opt=new FirebaseRecyclerOptions.Builder<loan>().setQuery(FirebaseDatabase.getInstance().getReference("Att_Loan"),loan.class).build();
         ladap= new loan_adapter(opt);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(ladap);
@@ -178,6 +190,10 @@ public class MainActivity extends AppCompatActivity {
         phn=dialog.findViewById(R.id.phone);
         em=dialog.findViewById(R.id.email);
         logout=dialog.findViewById(R.id.logout);
+        nm.setText(name);
+        phn.setText(phone);
+        em.setText(email);
+
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

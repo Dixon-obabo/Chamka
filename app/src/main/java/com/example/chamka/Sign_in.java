@@ -17,6 +17,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Sign_in extends AppCompatActivity {
 
     EditText mail,phone,name;
@@ -59,9 +62,13 @@ public class Sign_in extends AppCompatActivity {
             auth.createUserWithEmailAndPassword(mail.getText().toString(),password.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                 @Override
                 public void onSuccess(AuthResult authResult) {
+                    SimpleDateFormat sdf= new SimpleDateFormat("DD/MM/YYYY 'at' HH:MM:SS");
+                    String date= sdf.format(new Date());
                     String uid=authResult.getUser().getUid();
-                    user me = new user(name.getText().toString(),mail.getText().toString(),phone.getText().toString(),uid);
+                    user me = new user(name.getText().toString(),mail.getText().toString(),phone.getText().toString(),uid,date);
                     db.getReference("Users").child(uid).setValue(me);
+                    Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                    startActivity(intent);
                 }
             });
         }

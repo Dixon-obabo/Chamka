@@ -3,15 +3,25 @@ package com.example.chamka;
 public class user {
 String name;
 String email;
+String timestamp;
 String phone;
 String key;
 user(){}
 
-    public user(String name, String email, String phone, String key) {
+    public user(String name, String email, String phone, String key,String timestamp) {
         this.name = name;
+        this.timestamp = timestamp;
         this.email = email;
         this.phone = phone;
         this.key = key;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
     }
 
     public String getName() {
