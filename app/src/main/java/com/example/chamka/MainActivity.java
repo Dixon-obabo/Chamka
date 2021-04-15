@@ -23,6 +23,8 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -37,7 +39,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
-    Button loan, deposit, mkdepo, logout;
+    Button loan, deposit, mkdepo, logout, button1, button2;
     FloatingActionButton btn;
     ExtendedFloatingActionButton btm;
     EditText dpamount, rsn, lnamount;
@@ -48,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     String uid,phone,name,email;
     loan_adapter ladap;
     transaction_adapter tadap;
-    TextView nm,em,phn;
+    TextView nm,em,phn,title;
     RecyclerView recyclerView;
     FirebaseAuth auth;
     FirebaseUser currentuser;
@@ -57,7 +59,10 @@ public class MainActivity extends AppCompatActivity {
         protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        button1=findViewById(R.id.btn1);
+        button2=findViewById(R.id.btn2);
         loan=findViewById(R.id.loan);
+        title=findViewById(R.id.title);
         holder=findViewById(R.id.holder);
         recyclerView=findViewById(R.id.recycler);
         deposit=findViewById(R.id.Deposit);
@@ -82,53 +87,55 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void depositdialog(View view) {
-        dialog.setContentView(R.layout.depositdialog);
-        mkdepo=dialog.findViewById(R.id.mkdeposit);
-        dpamount=dialog.findViewById(R.id.depositamount);
-        mkdepo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/YYYY 'at' HH:MM:SS");
-                String date= sdf.format(new Date());
-                transaction trans=new transaction(currentuser.getUid(),dpamount.getText().toString(),"Deposit",date,"good");
-                deposit mydeposit= new deposit(currentuser.getUid(),dpamount.getText().toString(),date,phone);
-                //datastore.collection("Transactions").add(trans);
-                database.getReference("Att_Depo").child(database.getReference().push().getKey()).setValue(mydeposit).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(MainActivity.this, "Deposit attempt processing", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
-
-        dialog.show();
+//        dialog.setContentView(R.layout.depositdialog);
+//        mkdepo=dialog.findViewById(R.id.mkdeposit);
+//        dpamount=dialog.findViewById(R.id.depositamount);
+//        mkdepo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/YYYY 'at' HH:MM:SS");
+//                String date= sdf.format(new Date());
+//                transaction trans=new transaction(currentuser.getUid(),dpamount.getText().toString(),"Deposit",date,"good");
+//                deposit mydeposit= new deposit(currentuser.getUid(),dpamount.getText().toString(),date,phone);
+//                //datastore.collection("Transactions").add(trans);
+//                database.getReference("Att_Depo").child(database.getReference().push().getKey()).setValue(mydeposit).addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void aVoid) {
+//                        Toast.makeText(MainActivity.this, "Deposit attempt processing", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//            }
+//        });
+//
+//        dialog.show();
 
     }
 
     public void loandialog(View view) {
-        dialog.setContentView(R.layout.loandialog);
-        loan=dialog.findViewById(R.id.rqloan);
-        rsn=dialog.findViewById(R.id.reason);
-        lnamount=dialog.findViewById(R.id.loanamount);
-
-        loan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/YYYY 'at' HH:MM:SS");
-                String date= sdf.format(new Date());
-                loan myloan = new loan(currentuser.getUid(),lnamount.getText().toString(),currentuser.getEmail(),rsn.getText().toString(),date,phone);
-                database.getReference("Att_Loan").child(database.getReference().push().getKey()).setValue(myloan).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(MainActivity.this, "Your loan is being processed", Toast.LENGTH_SHORT).show();
-                    }
-                });
 
 
-            }
-        });
-        dialog.show();
+//        dialog.setContentView(R.layout.loandialog);
+//        loan=dialog.findViewById(R.id.rqloan);
+//        rsn=dialog.findViewById(R.id.reason);
+//        lnamount=dialog.findViewById(R.id.loanamount);
+//
+//        loan.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/YYYY 'at' HH:MM:SS");
+//                String date= sdf.format(new Date());
+//                loan myloan = new loan(currentuser.getUid(),lnamount.getText().toString(),currentuser.getEmail(),rsn.getText().toString(),date,phone);
+//                database.getReference("Att_Loan").child(database.getReference().push().getKey()).setValue(myloan).addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void aVoid) {
+//                        Toast.makeText(MainActivity.this, "Your loan is being processed", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//
+//
+//            }
+//        });
+//        dialog.show();
     }
 
     public void makedeposit(View view) {
@@ -226,29 +233,89 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void open_chama(View view) {
-        dialog.setContentView(R.layout.depositdialog);
-        mkdepo=dialog.findViewById(R.id.mkdeposit);
-        dpamount=dialog.findViewById(R.id.depositamount);
-        mkdepo.setOnClickListener(new View.OnClickListener() {
+//        dialog.setContentView(R.layout.depositdialog);
+//        mkdepo=dialog.findViewById(R.id.mkdeposit);
+//        dpamount=dialog.findViewById(R.id.depositamount);
+//        mkdepo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/YYYY 'at' HH:MM:SS");
+//                String date= sdf.format(new Date());
+//                transaction trans=new transaction(currentuser.getUid(),dpamount.getText().toString(),"Deposit",date,"good");
+//                deposit mydeposit= new deposit(currentuser.getUid(),dpamount.getText().toString(),date,phone);
+//                //datastore.collection("Transactions").add(trans);
+//                database.getReference("Att_Depo").child(database.getReference().push().getKey()).setValue(mydeposit).addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void aVoid) {
+//                        Toast.makeText(MainActivity.this, "Deposit attempt processing", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//            }
+//        });
+//
+//        dialog.show();
+//
+        dialog.setContentView(R.layout.loandialog);
+        loan=dialog.findViewById(R.id.rqloan);
+        title=dialog.findViewById(R.id.title);
+        rsn=dialog.findViewById(R.id.reason);
+        lnamount=dialog.findViewById(R.id.loanamount);
+        button2=dialog.findViewById(R.id.btn2);
+        button1=dialog.findViewById(R.id.btn1);
+        loan.setText("Request");
+        button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/YYYY 'at' HH:MM:SS");
-                String date= sdf.format(new Date());
-                transaction trans=new transaction(currentuser.getUid(),dpamount.getText().toString(),"Deposit",date,"good");
-                deposit mydeposit= new deposit(currentuser.getUid(),dpamount.getText().toString(),date,phone);
-                //datastore.collection("Transactions").add(trans);
-                database.getReference("Att_Depo").child(database.getReference().push().getKey()).setValue(mydeposit).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(MainActivity.this, "Deposit attempt processing", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                rsn.setVisibility(View.GONE);
+                loan.setText("Deposit");
+                title.setText("Make a deposit");
             }
         });
 
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rsn.setVisibility(View.VISIBLE);
+                loan.setText("Request");
+                title.setText("Request a loan");
+            }
+        });
+
+        loan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(loan.getText()=="Deposit"){
+                    Toast.makeText(MainActivity.this, "Hello nigga", Toast.LENGTH_SHORT).show();
+                    //Snackbar.make(v.getRootView(),"cool nigga", BaseTransientBottomBar.LENGTH_LONG).show();
+//                    SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/YYYY 'at' HH:MM:SS");
+//                    String date= sdf.format(new Date());
+//                    transaction trans=new transaction(currentuser.getUid(),dpamount.getText().toString(),"Deposit",date,"good");
+//                    deposit mydeposit= new deposit(currentuser.getUid(),dpamount.getText().toString(),date,phone);
+//                    //datastore.collection("Transactions").add(trans);
+//                    database.getReference("Att_Depo").child(database.getReference().push().getKey()).setValue(mydeposit).addOnSuccessListener(new OnSuccessListener<Void>() {
+//                        @Override
+//                        public void onSuccess(Void aVoid) {
+//                            Toast.makeText(MainActivity.this, "Deposit attempt processing", Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
+                }else if(loan.getText()=="Request"){
+                    Toast.makeText(MainActivity.this, "Dickson", Toast.LENGTH_SHORT).show();
+                    //Snackbar.make(v.getRootView(),"dickson",BaseTransientBottomBar.LENGTH_LONG).show();
+//                    SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/YYYY 'at' HH:MM:SS");
+//                    String date= sdf.format(new Date());
+//                    loan myloan = new loan(currentuser.getUid(),lnamount.getText().toString(),currentuser.getEmail(),rsn.getText().toString(),date,phone);
+//                    database.getReference("Att_Loan").child(database.getReference().push().getKey()).setValue(myloan).addOnSuccessListener(new OnSuccessListener<Void>() {
+//                        @Override
+//                        public void onSuccess(Void aVoid) {
+//                            Toast.makeText(MainActivity.this, "Your loan is being processed", Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
+//
+                }
+            }
+        });
         dialog.show();
-
-
-
     }
+
+
 }

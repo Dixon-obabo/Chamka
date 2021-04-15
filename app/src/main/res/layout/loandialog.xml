@@ -16,6 +16,8 @@
         android:layout_width="wrap_content"
         android:text="Deposit"
         android:layout_weight="1"
+        android:backgroundTint="@color/cardview_dark_background"
+        android:background="@color/cardview_dark_background"
         android:onClick="depositdialog"
         android:layout_height="wrap_content"/>
     <Button

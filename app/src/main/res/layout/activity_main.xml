@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_margin="5dp"
-        android:onClick="loandialog"
+        android:onClick="open_chama"
         android:text="Loan"
         />
 
