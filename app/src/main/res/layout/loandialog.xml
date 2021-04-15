@@ -16,11 +16,13 @@
         android:layout_width="wrap_content"
         android:text="Deposit"
         android:layout_weight="1"
+        android:onClick="depositdialog"
         android:layout_height="wrap_content"/>
     <Button
         android:id="@+id/btn2"
         android:layout_width="wrap_content"
         android:text="Loan"
+        android:onClick="loandialog"
         android:layout_weight="1"
         android:layout_height="wrap_content"
 
