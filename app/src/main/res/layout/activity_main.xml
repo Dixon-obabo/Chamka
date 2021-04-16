@@ -48,30 +48,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone">
+           android:visibility="gone" >
 
 <LinearLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/loan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:src="@drawable/ic_baseline_attach_money_24"
         android:layout_margin="5dp"
         android:onClick="open_chama"
-        android:text="Loan"
+
         />
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/Deposit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:onClick="open_chama"
-        android:text="Deposit"
-
+        android:src="@drawable/ic_baseline_shopping_basket_24"
+        android:onClick="open_lnmp"
         android:layout_margin="5dp"
         />
 

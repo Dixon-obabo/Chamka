@@ -1,13 +1,11 @@
 package com.example.chamka;
 
-import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,9 +30,9 @@ public class transaction_adapter extends FirestoreRecyclerAdapter<transaction, t
         holder.amount.setText(model.getAmount());
         holder.timestamp.setText(model.getTimestamp());
         holder.type.setText(model.getType());
-        if(model.getStatus()=="Failed"){
-            holder.status.setBackgroundColor(R.color.teal_700);
-        }
+//        if(model.getStatus()=="Failed"){
+//           // holder.status.setBackgroundColor(R.color.teal_700);
+//        }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

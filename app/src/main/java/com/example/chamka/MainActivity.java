@@ -1,33 +1,27 @@
 package com.example.chamka;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.BaseTransientBottomBar;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -39,10 +33,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
-    Button loan, deposit, mkdepo, logout, button1, button2;
-    FloatingActionButton btn;
+    Button  loan,  mkdepo, logout, button1, button2, button3, button4;
+    FloatingActionButton  btn,deposit;
     ExtendedFloatingActionButton btm;
-    EditText dpamount, rsn, lnamount;
+    EditText dpamount, rsn, lnamount, acc_num, buss_num;
     ScrollView holder;
     FirebaseFirestore datastore=FirebaseFirestore.getInstance();
     FirebaseDatabase database=FirebaseDatabase.getInstance();
@@ -50,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     String uid,phone,name,email;
     loan_adapter ladap;
     transaction_adapter tadap;
-    TextView nm,em,phn,title;
+    TextView nm,em,phn,title, title2;
     RecyclerView recyclerView;
     FirebaseAuth auth;
     FirebaseUser currentuser;
@@ -61,12 +55,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         button1=findViewById(R.id.btn1);
         button2=findViewById(R.id.btn2);
-        loan=findViewById(R.id.loan);
+        loan=findViewById(R.id.rqloan);
         title=findViewById(R.id.title);
+        title2=findViewById(R.id.txtviw);
         holder=findViewById(R.id.holder);
         recyclerView=findViewById(R.id.recycler);
         deposit=findViewById(R.id.Deposit);
         dialog= new Dialog(this);
+        btn=findViewById(R.id.request);
         btm=findViewById(R.id.uname);
         auth=FirebaseAuth.getInstance();
         currentuser=auth.getCurrentUser();
@@ -80,8 +76,13 @@ public class MainActivity extends AppCompatActivity {
 
         if(holder.getVisibility()==View.GONE){
             holder.setVisibility(View.VISIBLE);
+
+            btn.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_keyboard_arrow_down_24));
+
         }else {
             holder.setVisibility(View.GONE);
+            btn.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_keyboard_arrow_up_24));
+
         }
     }
 
@@ -230,6 +231,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     dialog.show();
+
     }
 
     public void open_chama(View view) {
@@ -318,4 +320,57 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void open_lnmp(View view) {
+        dialog.setContentView(R.layout.depositdialog);
+        mkdepo=dialog.findViewById(R.id.mkdeposit);
+        dpamount=dialog.findViewById(R.id.depositamount);
+        button3=dialog.findViewById(R.id.btn3);
+        button4=dialog.findViewById(R.id.btn4);
+        title2=dialog.findViewById(R.id.txtviw);
+        buss_num=dialog.findViewById(R.id.bussiness_num);
+        acc_num=dialog.findViewById(R.id.account_num);
+
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                title2.setText("Lipa na Mpesa");
+                acc_num.setVisibility(View.GONE);
+                mkdepo.setText("Pay");
+            }
+        });
+        button4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                title2.setText("Pay your bill");
+                mkdepo.setText("Pay Bill");
+                acc_num.setVisibility(View.VISIBLE);
+            }
+        });
+        mkdepo.setText("Pay");
+        mkdepo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(mkdepo.getText()=="Pay"){
+
+                }else if(mkdepo.getText()=="Pay Bill"){
+
+                }
+                SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/YYYY 'at' HH:MM:SS");
+                String date= sdf.format(new Date());
+                transaction trans=new transaction(currentuser.getUid(),dpamount.getText().toString(),"Deposit",date,"good");
+                deposit mydeposit= new deposit(currentuser.getUid(),dpamount.getText().toString(),date,phone);
+                //datastore.collection("Transactions").add(trans);
+                database.getReference("Att_Depo").child(database.getReference().push().getKey()).setValue(mydeposit).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(MainActivity.this, "Deposit attempt processing", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
+        dialog.show();
+
+    }
 }

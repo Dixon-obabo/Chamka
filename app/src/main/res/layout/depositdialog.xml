@@ -1,16 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="190dp">
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/ll2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/btn3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Shop"/>
+        <Button
+            android:id="@+id/btn4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="paybill"/>
+    </LinearLayout>
 <TextView
     android:id="@+id/txtviw"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Make a deposit"
+    android:text="Lipa na Mpesa"
     android:gravity="center"
+    android:layout_below="@+id/ll2"
     android:textSize="25dp"
     android:layout_margin="10dp"
     />
+    <EditText
+        android:id="@+id/bussiness_num"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Business Number"
+        android:gravity="center"
+        android:layout_below="@+id/txtviw"/>
+    <EditText
+        android:id="@+id/account_num"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Account number"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_below="@id/bussiness_num"/>
+
     <EditText
         android:id="@+id/depositamount"
         android:hint="Amount"
@@ -18,14 +56,14 @@
         android:inputType="number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtviw"
+        android:layout_below="@+id/account_num"
         android:layout_margin="5dp"
         />
 
     <Button
         android:id="@+id/mkdeposit"
         android:layout_below="@+id/depositamount"
-        android:text="Deposit"
+        android:text="Pay"
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
