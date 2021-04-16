@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        //ladap.startListening();
+
         tadap.startListening();
 
     }
@@ -235,28 +235,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void open_chama(View view) {
-//        dialog.setContentView(R.layout.depositdialog);
-//        mkdepo=dialog.findViewById(R.id.mkdeposit);
-//        dpamount=dialog.findViewById(R.id.depositamount);
-//        mkdepo.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/YYYY 'at' HH:MM:SS");
-//                String date= sdf.format(new Date());
-//                transaction trans=new transaction(currentuser.getUid(),dpamount.getText().toString(),"Deposit",date,"good");
-//                deposit mydeposit= new deposit(currentuser.getUid(),dpamount.getText().toString(),date,phone);
-//                //datastore.collection("Transactions").add(trans);
-//                database.getReference("Att_Depo").child(database.getReference().push().getKey()).setValue(mydeposit).addOnSuccessListener(new OnSuccessListener<Void>() {
-//                    @Override
-//                    public void onSuccess(Void aVoid) {
-//                        Toast.makeText(MainActivity.this, "Deposit attempt processing", Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-//            }
-//        });
-//
-//        dialog.show();
-//
+
         dialog.setContentView(R.layout.loandialog);
         loan=dialog.findViewById(R.id.rqloan);
         title=dialog.findViewById(R.id.title);
