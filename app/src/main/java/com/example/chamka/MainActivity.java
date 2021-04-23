@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void gettransaction(){
-        Query query=datastore.collection("Transactions");
+        Query query=datastore.collection("Transactions").whereEqualTo("userid",currentuser.getUid());
 
         FirestoreRecyclerOptions<transaction> options= new FirestoreRecyclerOptions.Builder<transaction>().setQuery(query,transaction.class).build();
         tadap= new transaction_adapter(options);
