@@ -32,7 +32,7 @@
         android:layout_below="@id/phone"
         android:gravity="center"
         android:layout_height="wrap_content"
-        android:textSize="20dp"/>
+        android:textSize="18dp"/>
     <Button
         android:id="@+id/logout"
         android:layout_width="wrap_content"
