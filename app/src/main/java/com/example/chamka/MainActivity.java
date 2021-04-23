@@ -88,55 +88,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void depositdialog(View view) {
-//        dialog.setContentView(R.layout.depositdialog);
-//        mkdepo=dialog.findViewById(R.id.mkdeposit);
-//        dpamount=dialog.findViewById(R.id.depositamount);
-//        mkdepo.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/YYYY 'at' HH:MM:SS");
-//                String date= sdf.format(new Date());
-//                transaction trans=new transaction(currentuser.getUid(),dpamount.getText().toString(),"Deposit",date,"good");
-//                deposit mydeposit= new deposit(currentuser.getUid(),dpamount.getText().toString(),date,phone);
-//                //datastore.collection("Transactions").add(trans);
-//                database.getReference("Att_Depo").child(database.getReference().push().getKey()).setValue(mydeposit).addOnSuccessListener(new OnSuccessListener<Void>() {
-//                    @Override
-//                    public void onSuccess(Void aVoid) {
-//                        Toast.makeText(MainActivity.this, "Deposit attempt processing", Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-//            }
-//        });
-//
-//        dialog.show();
-
     }
 
     public void loandialog(View view) {
 
-
-//        dialog.setContentView(R.layout.loandialog);
-//        loan=dialog.findViewById(R.id.rqloan);
-//        rsn=dialog.findViewById(R.id.reason);
-//        lnamount=dialog.findViewById(R.id.loanamount);
-//
-//        loan.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/YYYY 'at' HH:MM:SS");
-//                String date= sdf.format(new Date());
-//                loan myloan = new loan(currentuser.getUid(),lnamount.getText().toString(),currentuser.getEmail(),rsn.getText().toString(),date,phone);
-//                database.getReference("Att_Loan").child(database.getReference().push().getKey()).setValue(myloan).addOnSuccessListener(new OnSuccessListener<Void>() {
-//                    @Override
-//                    public void onSuccess(Void aVoid) {
-//                        Toast.makeText(MainActivity.this, "Your loan is being processed", Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-//
-//
-//            }
-//        });
-//        dialog.show();
     }
 
     public void makedeposit(View view) {
@@ -268,7 +223,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(loan.getText()=="Deposit"){
 
-                    SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/YYYY 'at' hh:mm:ss");
+                    SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/YYYY 'at' hh:mm");
                     String date= sdf.format(new Date());
                     deposit mydeposit= new deposit(currentuser.getUid(),lnamount.getText().toString(),date,phone);
                     database.getReference("Att_Depo").child(database.getReference().push().getKey()).setValue(mydeposit).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -278,9 +233,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
                 }else if(loan.getText()=="Request"){
-                   // Toast.makeText(MainActivity.this, "Dickson", Toast.LENGTH_SHORT).show();
-
-                    SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/YYYY 'at' HH:MM:SS");
+                    SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/YYYY 'at' hh:mm");
                     String date= sdf.format(new Date());
                     loan myloan = new loan(currentuser.getUid(),lnamount.getText().toString(),currentuser.getEmail(),rsn.getText().toString(),date,phone);
                     database.getReference("Att_Loan").child(database.getReference().push().getKey()).setValue(myloan).addOnSuccessListener(new OnSuccessListener<Void>() {
