@@ -68,9 +68,8 @@ public class MainActivity extends AppCompatActivity {
         auth=FirebaseAuth.getInstance();
         currentuser=auth.getCurrentUser();
         //getdata();
-        gettransaction();
         check_login();
-
+        gettransaction();
     }
 
     public void openrequest(View view) {

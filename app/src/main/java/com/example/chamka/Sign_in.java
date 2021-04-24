@@ -1,16 +1,17 @@
 package com.example.chamka;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -56,6 +57,13 @@ public class Sign_in extends AppCompatActivity {
                 public void onSuccess(AuthResult authResult) {
                     Intent intent= new Intent(getApplicationContext(),MainActivity.class);
                     startActivity(intent);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(Sign_in.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+             //       Snackbar.make(getCurrentFocus(),e.getMessage(), BaseTransientBottomBar.LENGTH_LONG);
+
                 }
             });
         }
