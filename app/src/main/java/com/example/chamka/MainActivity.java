@@ -2,6 +2,7 @@ package com.example.chamka;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -192,6 +193,7 @@ public class MainActivity extends AppCompatActivity {
     public void open_chama(View view) {
 
         dialog.setContentView(R.layout.loandialog);
+      //  dialog.getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.purple_200));
         loan=dialog.findViewById(R.id.rqloan);
         title=dialog.findViewById(R.id.title);
 
@@ -200,12 +202,18 @@ public class MainActivity extends AppCompatActivity {
         button2=dialog.findViewById(R.id.btn2);
         button1=dialog.findViewById(R.id.btn1);
         loan.setText("Request");
+        button2.setBackgroundColor(Color.DKGRAY);
+        button2.setTextColor(Color.WHITE);
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 rsn.setVisibility(View.GONE);
                 loan.setText("Deposit");
                 title.setText("Make a deposit");
+                button1.setTextColor(Color.WHITE);
+                button1.setBackgroundColor(Color.DKGRAY);
+                button2.setTextColor(Color.BLACK);
+                button2.setBackgroundColor(getResources().getColor(R.color.purple_200));
             }
         });
 
@@ -213,6 +221,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 rsn.setVisibility(View.VISIBLE);
+                button2.setBackgroundColor(Color.DKGRAY);
+                button2.setTextColor(Color.WHITE);
+                button1.setTextColor(Color.BLACK);
+                button1.setBackgroundColor(getResources().getColor(R.color.purple_200));
                 loan.setText("Request");
                 title.setText("Request a loan");
             }
@@ -259,12 +271,18 @@ public class MainActivity extends AppCompatActivity {
         title2=dialog.findViewById(R.id.txtviw);
         buss_num=dialog.findViewById(R.id.bussiness_num);
         acc_num=dialog.findViewById(R.id.account_num);
+        button3.setBackgroundColor(Color.DKGRAY);
+        button3.setTextColor(Color.WHITE);
 
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 title2.setText("Lipa na Mpesa");
                 acc_num.setVisibility(View.GONE);
+                button3.setBackgroundColor(Color.DKGRAY);
+                button3.setTextColor(Color.WHITE);
+                button4.setTextColor(Color.BLACK);
+                button4.setBackgroundColor(getResources().getColor(R.color.purple_200));
                 mkdepo.setText("Pay");
             }
         });
@@ -273,6 +291,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 title2.setText("Pay your bill");
                 mkdepo.setText("Pay Bill");
+                button4.setBackgroundColor(Color.DKGRAY);
+                button4.setTextColor(Color.WHITE);
+                button3.setTextColor(Color.BLACK);
+                button3.setBackgroundColor(getResources().getColor(R.color.purple_200));
                 acc_num.setVisibility(View.VISIBLE);
             }
         });
