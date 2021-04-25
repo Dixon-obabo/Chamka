@@ -323,4 +323,9 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
 
     }
+
+    public void chamadialog(View view) {
+
+
+    }
 }

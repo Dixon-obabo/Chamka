@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:text="Name"
         app:layout_anchor="@id/appbar"
-        android:onClick="User_dialog"
+        android:onClick="chamadialog"
         android:gravity="center"
         app:layout_anchorGravity="bottom|right"
         />
