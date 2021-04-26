@@ -325,7 +325,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void chamadialog(View view) {
-        dialog.setContentView(R.layout.chamadialog);
-
+//        dialog.setContentView(R.layout.chamadialog);
+        Toast.makeText(this, "hello you", Toast.LENGTH_SHORT).show();
     }
 }

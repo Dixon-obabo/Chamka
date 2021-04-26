@@ -12,9 +12,17 @@
        android:layout_width="match_parent"
        android:layout_height="wrap_content">
 
+
        <com.google.android.material.appbar.CollapsingToolbarLayout
            android:layout_width="match_parent"
            android:layout_height="250dp">
+           <Button
+               android:layout_width="30dp"
+               android:layout_height="30dp"
+               android:background="@drawable/ic_baseline_more_vert_24"
+               android:onClick="open_chama"
+               />
+
        </com.google.android.material.appbar.CollapsingToolbarLayout>
 
    </com.google.android.material.appbar.AppBarLayout>
