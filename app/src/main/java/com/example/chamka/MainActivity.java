@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         btm=findViewById(R.id.uname);
         auth=FirebaseAuth.getInstance();
         currentuser=auth.getCurrentUser();
-        //getdata();
+
         check_login();
         gettransaction();
     }
@@ -325,7 +325,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void chamadialog(View view) {
-
+        dialog.setContentView(R.layout.chamadialog);
 
     }
 }
